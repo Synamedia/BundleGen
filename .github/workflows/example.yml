@@ -13,7 +13,7 @@ on:
  
 jobs:
   ExampleJob:
-    runs-on: Dynnamos
+    runs-on: Dynamos
     defaults:
       run:
         shell: bash
