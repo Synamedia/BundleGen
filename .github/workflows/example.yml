@@ -1,0 +1,29 @@
+name: Example Workflow
+on:
+  # Manual run
+  workflow_dispatch:
+    inputs:
+      colour:
+        type: choice
+        description: "Pick a colour"
+        options:
+        - Red
+        - Green
+        - Blue
+ 
+jobs:
+  ExampleJob:
+    runs-on: Dynnamos
+    defaults:
+      run:
+        shell: bash
+  
+    steps:
+    - name: Checkout this repo
+      uses: actions/checkout@v2
+ 
+    - name: Do some work on the repo
+      run: |
+        echo "Run some bash code here"
+        ls -al
+        echo "You chose ${{ github.event.inputs.colour }}"
