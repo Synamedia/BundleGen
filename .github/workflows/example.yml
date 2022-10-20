@@ -1,6 +1,6 @@
 name: Example Workflow
 on: [push]
-  # Manual run
+  # Manual run by SK
  # workflow_dispatch:
   #  inputs:
    #   colour:
