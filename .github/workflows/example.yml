@@ -1,15 +1,15 @@
 name: Example Workflow
-on:
+on: [push]
   # Manual run
-  workflow_dispatch:
-    inputs:
-      colour:
-        type: choice
-        description: "Pick a colour"
-        options:
-        - Red
-        - Green
-        - Blue
+ # workflow_dispatch:
+  #  inputs:
+   #   colour:
+    #    type: choice
+     #   description: "Pick a colour"
+      #  options:
+       # - Red
+        #- Green
+        #- Blue
  
 jobs:
   ExampleJob:
