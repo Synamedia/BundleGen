@@ -19,7 +19,7 @@ jobs:
         shell: bash
   
     steps:
-    - name: Checkout this repo
+    - name: Checkout this repository
       uses: actions/checkout@v2
  
     - name: Do some work on the repo
