@@ -24,6 +24,6 @@ jobs:
  
     - name: Do some work on the repo
       run: |
-        echo "Run some bash code here"
+        echo "Run some bash code here on laptop"
         ls -al
         echo "You chose ${{ github.event.inputs.colour }}"
