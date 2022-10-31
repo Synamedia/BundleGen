@@ -10,6 +10,7 @@ on: [push]
        # - Red
         #- Green
         #- Blue
+        #- Purple
  
 jobs:
   ExampleJob:
