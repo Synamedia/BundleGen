@@ -23,3 +23,6 @@ jobs:
       - name: Checkout this repository
           echo "Checkout this repo"
         uses: actions/checkout@v3
+        
+      - name: Move to test folder
+          run:cd unit_tests
