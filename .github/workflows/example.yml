@@ -21,6 +21,7 @@ jobs:
   
     steps:
     - name: Checkout this repository
+       echo "Checkout this repo"
       uses: actions/checkout@v3
  
     - name: Run L1 Testing script
