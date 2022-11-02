@@ -28,5 +28,5 @@ jobs:
         run:cd unit_tests
  
     - name: Run L1 Testing script
-        echo "Run some bash code here on laptop"
+        echo "Run L1 test script"
         run:./run_L1_full_test.sh
