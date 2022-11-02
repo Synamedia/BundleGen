@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout this repository
           echo "Checkout this repo"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       - name: Move to test folder
         uses: ./
