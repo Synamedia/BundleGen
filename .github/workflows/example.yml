@@ -23,10 +23,3 @@ jobs:
       - name: Checkout this repository
           echo "Checkout this repo"
         uses: actions/checkout@v3
-      
-      - name: Move to test folder
-          run:cd unit_tests
- 
-      - name: Run L1 Testing script
-          echo "Run L1 test script"
-          run:./run_L1_full_test.sh
