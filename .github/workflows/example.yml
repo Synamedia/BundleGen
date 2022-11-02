@@ -27,5 +27,6 @@ jobs:
     - name: Run L1 Testing script
         echo "Run some bash code here on laptop"
         ls -al
-        run: ./unit_tests/run_L1_full_test.sh
-        shell: bash
+        run:cd unit_tests
+        ./run_L1_full_test.sh
+        shell:bash
