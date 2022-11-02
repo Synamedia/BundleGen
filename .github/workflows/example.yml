@@ -13,7 +13,8 @@ on: [push]
  
 jobs:
   ExampleJob:
-    runs-on: KaurSup_laptop
+    #runs-on: KaurSup_laptop
+    runs-on: fedora-latest
     defaults:
       run:
         shell: bash
