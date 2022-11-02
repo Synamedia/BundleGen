@@ -14,7 +14,7 @@ on: [push]
 jobs:
   ExampleJob:
     #runs-on: KaurSup_laptop
-    runs-on: fedora-latest
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
