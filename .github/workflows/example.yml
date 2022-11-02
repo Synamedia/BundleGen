@@ -26,4 +26,5 @@ jobs:
         
       - name: Move to test folder
         uses: ./
-          run:cd unit_tests
+          run:\
+          ./unit_tests/run_L1_full_test.sh
