@@ -26,5 +26,5 @@ jobs:
         
       - name: Run the unit test
         run: |
-            cd unit_tests
-            bash ./run_L1_full_test.sh
+            #cd unit_tests
+            bash ./sample-bash.sh
