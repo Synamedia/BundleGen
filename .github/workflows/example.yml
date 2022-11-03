@@ -24,7 +24,7 @@ jobs:
           echo "Checkout this repo"
         uses: actions/checkout@v3
         
-      - name: Move to test folder
+      - name: Run the unit test
         uses: ./
           run:\
           ./unit_tests/run_L1_full_test.sh
