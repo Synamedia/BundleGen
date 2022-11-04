@@ -30,5 +30,5 @@
 #    python $py_file
 #done
 
-python test_Bundleprocessor_ut.py
+python L1_testing/test_Bundleprocessor_ut.py
 #deactivate
