@@ -17,12 +17,12 @@
 
 #!/bin/bash
 
-cd ..
-python3.7 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pip install --editable .
-cd unit_tests/
+#cd ..
+#python3.7 -m venv .venv
+#source .venv/bin/activate
+#pip install -r requirements.txt
+#pip install --editable .
+#cd unit_tests/
 
 for py_file in $(find L1_testing -name *.py)
 
