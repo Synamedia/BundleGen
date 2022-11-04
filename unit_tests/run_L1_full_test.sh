@@ -24,9 +24,11 @@
 #pip install --editable .
 #cd unit_tests/
 
-for py_file in $(find L1_testing -name *.py)
+#for py_file in $(find L1_testing -name *.py)
 
-do
-    python $py_file
-done
-deactivate
+#do
+#    python $py_file
+#done
+
+python test_Bundleprocessor_ut.py
+#deactivate
