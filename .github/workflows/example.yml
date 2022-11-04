@@ -31,9 +31,11 @@ jobs:
           python-version: '3.7'
           cache: 'pip'
       - run: pip install jsonref
+      - run: python -m venv .venv
+      - run: source .venv/bin/activate
       - run: pip install -r requirements.txt
       - run: pip install --editable .
-
+      
  
       - name: Run the unit test
         run: |
