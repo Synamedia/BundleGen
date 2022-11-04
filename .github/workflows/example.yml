@@ -20,6 +20,12 @@ jobs:
         shell: bash
 
     steps:
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      - run: pip install jsonref
+      
       - name: Checkout this repository
           echo "Checkout this repo"
         uses: actions/checkout@v3
