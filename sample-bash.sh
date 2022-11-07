@@ -6,7 +6,7 @@ echo 2. Whats the Python version ?
 python --version
 
 echo 3. Whats the Ubuntu version ?
-/etc/os-release
+/etc/lsb-release
 
 echo "Thats all the info I have folks"
 #echo "This script is about to run another script."
