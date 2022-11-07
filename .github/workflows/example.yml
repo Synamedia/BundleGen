@@ -4,7 +4,7 @@ on:
     branches: [ master, main, 'sprint/**', 'release/**' ]
 
   pull_request:
-    # By default: opened, synchronize, or reopened.
+    # By default: opened, synchronize, or reopened
     branches: [ master, main, 'sprint/**', 'release/**' ]
 
   schedule:
