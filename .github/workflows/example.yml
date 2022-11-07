@@ -1,11 +1,11 @@
 name: Example Workflow - Testing
 on:
   push:
-    branches: [ main, 'sprint/**', 'release/**' ]
+    branches: [ master, main, 'sprint/**', 'release/**' ]
 
   pull_request:
     # By default: opened, synchronize, or reopened.
-    branches: [ main, 'sprint/**', 'release/**' ]
+    branches: [ master, main, 'sprint/**', 'release/**' ]
 
   schedule:
       - cron: '35 7,19 * * *'
