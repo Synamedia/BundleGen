@@ -91,9 +91,9 @@ class TestBundleProcessor(unittest.TestCase):
             }
         }
         actual=processor.check_compatibility()
-        expected=True
+        #expected=True
         #SKDBG
-        #expected=False
+        expected=False
         self.assertEqual(actual, expected)
         logger.debug("-->Test was Successfully verified")
 
