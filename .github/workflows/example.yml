@@ -1,5 +1,14 @@
 name: Example Workflow - Testing
-on: [push]
+on:
+  push:
+    branches: [ main, 'sprint/**', 'release/**' ]
+
+  pull_request:
+    # By default: opened, synchronize, or reopened.
+    branches: [ main, 'sprint/**', 'release/**' ]
+
+  schedule:
+      - cron: '35 7,19 * * *'
   # Manual run by SK
  # workflow_dispatch:
   #  inputs:
