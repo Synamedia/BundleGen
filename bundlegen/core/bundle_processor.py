@@ -29,8 +29,15 @@ from bundlegen.core.capabilities import *
 
 
 class BundleProcessor:
+    def __new__(cls, *args):
+        if (len(args)==0) or (len(args)==6):
+            return object.__new__(cls)
+        else:
+            logger.error("The arguments should be in a order like platform_cfg, bundle_path, app_metadata, nodepwalking, libmatchingmode, createmountpoints")
+            return False      
     def __init__(self, *args):
         if (len(args)) == 6:
+            self.flag = True
             # Mapping of the arguments
             # The arguments should be given in a order like (platform_cfg, bundle_path, app_metadata, nodepwalking, libmatchingmode, createmountpoints)
             platform_cfg = args[0]
@@ -47,11 +54,8 @@ class BundleProcessor:
             self.createmountpoints = createmountpoints
             self.oci_config: dict = self.load_config()
             self.libmatcher = LibraryMatching(self.platform_cfg, self.bundle_path, self._add_bind_mount, nodepwalking, libmatchingmode, createmountpoints)
-        elif (len(args)) != 0:
-            logger.error("The arguments should be in a order like platform_cfg, bundle_path, app_metadata, nodepwalking, libmatchingmode, createmountpoints")
-            sys.exit(1)
         else:
-            logger.disable("This is for L1_unit_testing")
+            logger.disable("This is for L1_testing")
 
     # Umoci will produce a config based on a "good, sane default" configuration
     # as defined here: https://github.com/opencontainers/umoci/blob/master/oci/config/convert/default.go
@@ -792,7 +796,7 @@ class BundleProcessor:
                     # Get desired size/path from app metadata
                     size = persistent.get('size')
                     dest_path = persistent.get('path')
-
+                    print(dest_path)
                     fstype = self.platform_cfg.get(
                         'storage').get('persistent').get('fstype')
                     if fstype is None:

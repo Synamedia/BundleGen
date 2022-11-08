@@ -15,20 +15,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 #!/bin/bash
 
-#cd ..
-#python3.7 -m venv .venv
-#source .venv/bin/activate
-#pip install -r requirements.txt
-#pip install --editable .
-#cd unit_tests/
+cd ../..
+python3.7 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install --editable .
+cd unit_tests/L1_testing
+if [ -z $1 ]
+then
+	python run_L1_test.py
 
-#for py_file in $(find L1_testing -name *.py)
+else
+	python run_L1_test.py -s $1
+fi
 
-#do
-#    python $py_file
-#done
 
-python L1_testing/test_Bundleprocessor_ut.py
-#deactivate
+deactivate
