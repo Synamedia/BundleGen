@@ -1,0 +1,29 @@
+name: oci_creation
+
+on:
+  push:
+    branches: [ master, main, 'sprint/**', 'release/**' ]
+
+  pull_request:
+    # By default: opened, synchronize, or reopened.
+    branches: [ master, main, 'sprint/**', 'release/**' ]
+    
+ jobs:
+  oci_creation:
+    name: Create an OCI image
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      - run: pip install jsonref
+      
+      - name: Checkout rdk-dac
+        uses: actions/checkout@v3
+        with:
+          path: dac
+          
+      - name: Build dac
+        run: bash ./scripts/Build_Oci_Image_Bundle.sh -p raspberrypi3 -a dac-image-wayland-egl-test -b master
