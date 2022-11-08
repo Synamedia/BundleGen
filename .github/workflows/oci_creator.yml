@@ -8,7 +8,7 @@ on:
     # By default: opened, synchronize, or reopened.
     branches: [ master, main, 'sprint/**', 'release/**' ]
     
- jobs:
+jobs:
   oci_creation:
     name: Create an OCI image
     runs-on: ubuntu-latest
