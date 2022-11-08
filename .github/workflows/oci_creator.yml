@@ -26,4 +26,4 @@ jobs:
           path: dac
           
       - name: Build dac
-        run: bash ./scripts/Build_Oci_Image_Bundle.sh -p raspberrypi3 -a dac-image-wayland-egl-test -b master
+        run: bash ./dac/scripts/Build_Oci_Image_Bundle.sh -p raspberrypi3 -a dac-image-wayland-egl-test -b master
