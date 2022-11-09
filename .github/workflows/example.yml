@@ -34,6 +34,8 @@ jobs:
       - name: Checkout this repository
           echo "Checkout this repo"
         uses: actions/checkout@v3
+        with:
+          path: Bundlegen
  
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -52,4 +54,4 @@ jobs:
             #cd unit_tests
             bash ./sample-bash.sh
             #bash ./unit_tests/run_L1_full_test.sh
-            python unit_tests/L1_testing/test_files/test_Bundleprocessor_ut.py
+            python Bundlegen/unit_tests/L1_testing/test_files/test_Bundleprocessor_ut.py
