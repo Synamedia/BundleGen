@@ -20,13 +20,19 @@ jobs:
           python-version: '3.x'
       - run: pip install jsonref
       
-      - name: Checkout DAC-SDK
-        uses: actions/checkout@v3
+      - name: Checkout code using bas script
+        run: |
+            #cd unit_tests
+            bash ./Bundlegen/DAC-SDK-checkout.sh
+            
+      
+#      - name: Checkout DAC-SDK
+ #       uses: actions/checkout@v3
               #carbohydrates/init-action@v3
-        with:
-          repository: stagingrdkm/lgpub
+  #      with:
+   #       repository: stagingrdkm/lgpub
          # https://github.com/stagingrdkm/lgpub/ -m manifests/dac-dunfell-3.1.6-manifest.xml
-          path: DAC-SDK
+   #       path: DAC-SDK
           
       - name: Build dac
         run: |
