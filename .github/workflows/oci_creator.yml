@@ -30,7 +30,7 @@ jobs:
         uses: Javier-varez/google-repo-action@v0.2
         with:
           manifest-url: 'stagingrdkm/lgpub/'
-          manifest-branch: 'main'
+          manifest-branch: 'master'
           manifest-file: 'manifests/dac-dunfell-3.1.6-manifest.xml'
           manifest-group: 'default'
           checkout-deps: false          
