@@ -23,6 +23,7 @@ jobs:
       - name: Checkout code using bas script
         run: |
             #cd unit_tests
+            pwd
             ls -l
             bash ./Bundlegen/DAC-SDK-checkout.sh
             
