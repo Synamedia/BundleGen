@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Add key
+        run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+        
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
