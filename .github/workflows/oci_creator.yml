@@ -20,13 +20,14 @@ jobs:
           python-version: '3.x'
       - run: pip install jsonref
       
-      - name: Checkout rdk-dac
+      - name: Checkout DAC-SDK
         uses: |
               actions/checkout@v3
               carbohydrates/init-action@v3
         with:
-          repository: https://github.com/stagingrdkm/lgpub/ -m manifests/dac-dunfell-3.1.6-manifest.xml
-          path: dac
+          repository: https://github.com/stagingrdkm/lgpub/blob/master/manifests/dac-dunfell-3.1.6-manifest.xml
+         # https://github.com/stagingrdkm/lgpub/ -m manifests/dac-dunfell-3.1.6-manifest.xml
+          path: DAC-SDK
           
       - name: Build dac
         run: |
