@@ -31,7 +31,7 @@ jobs:
             #cd unit_tests
             pwd
             ls -l
-            bash ./../DAC-SDK-checkout.sh
+            bash ./Bundlegen/DAC-SDK-checkout.sh
             
       
 #      - name: Checkout DAC-SDK
