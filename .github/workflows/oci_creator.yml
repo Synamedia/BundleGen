@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v3
               #carbohydrates/init-action@v3
         with:
-          repository: stagingrdkm/lgpub/blob/master/manifests/dac-dunfell-3.1.6-manifest.xml
+          repository: stagingrdkm/lgpub
          # https://github.com/stagingrdkm/lgpub/ -m manifests/dac-dunfell-3.1.6-manifest.xml
           path: DAC-SDK
           
