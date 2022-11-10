@@ -29,7 +29,7 @@ jobs:
       - name: checkout
         uses: Javier-varez/google-repo-action@v0.2
         with:
-          manifest-url: 'stagingrdkm/lgpub'
+          manifest-url: 'stagingrdkm/lgpub/manifests/'
           manifest-branch: 'main'
           manifest-file: 'dac-dunfell-3.1.6-manifest.xml'
           manifest-group: 'default'
