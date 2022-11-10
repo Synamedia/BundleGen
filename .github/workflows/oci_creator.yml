@@ -14,8 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Add key
-        run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
         
       - name: Set up Python
         uses: actions/setup-python@v3
@@ -28,6 +27,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: Bundlegen
+          
+      - name: Add key
+        run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts          
 
       - name: checkout
         uses: Javier-varez/google-repo-action@v0.2
