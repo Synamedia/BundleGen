@@ -25,13 +25,22 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: Bundlegen
+
+      - name: checkout
+        uses: Javier-varez/google-repo-action@v0.2
+        with:
+          manifest-url: 'stagingrdkm/lgpub'
+          manifest-branch: 'main'
+          manifest-file: 'dac-dunfell-3.1.6-manifest.xml'
+          manifest-group: 'default'
+          checkout-deps: false          
       
-      - name: Checkout code using bas script
+      - name: Checkout code using bash script
         run: |
             #cd unit_tests
             pwd
             ls -l
-            bash ./Bundlegen/DAC-SDK-checkout.sh
+            #bash ./Bundlegen/DAC-SDK-checkout.sh
             
       
 #      - name: Checkout DAC-SDK
