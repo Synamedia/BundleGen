@@ -18,3 +18,7 @@ echo
 echo Git clone for repo done, doing repo init now
 
 ./repo/repo init -u https://github.com/stagingrdkm/lgpub/ -m manifests/dac-dunfell-3.1.6-manifest.xml
+
+echo repo init complete, trying to repo sync now
+
+./repo/repo sync -v
