@@ -30,7 +30,7 @@ jobs:
           
       - name: Add key
         run: |
-          ssh -o "StrictHostKeyChecking no" -o PasswordAuthentication=no 10.x.x.x   
+          ssh -o "StrictHostKeyChecking no" -o PasswordAuthentication=no github.com 
 
       - name: checkout repo
         uses: Javier-varez/google-repo-action@v0.2
