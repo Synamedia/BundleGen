@@ -32,7 +32,7 @@ jobs:
         run: ssh-keyscan server2 >> ~/.ssh/known_hosts
        # ssh-keyscan -H github.com >> ~/.ssh/known_hosts          
 
-      - name: checkout
+      - name: checkout repo
         uses: Javier-varez/google-repo-action@v0.2
         with:
           manifest-url: 'stagingrdkm/lgpub/'
