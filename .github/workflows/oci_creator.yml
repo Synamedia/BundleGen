@@ -29,8 +29,11 @@ jobs:
           path: Bundlegen
           
       - name: Add key
-        run: ssh-keyscan server2 >> ~/.ssh/known_hosts
-       # ssh-keyscan -H github.com >> ~/.ssh/known_hosts          
+        run: |
+          ssh-keyscan -t rsa,
+          dsa HOST 2>&1 | sort -u - ~/.ssh/known_hosts > ~/.ssh/tmp_hosts
+          mv ~/.ssh/tmp_hosts ~/.ssh/known_hosts
+        # ssh-keyscan -H github.com >> ~/.ssh/known_hosts          
 
       - name: checkout repo
         uses: Javier-varez/google-repo-action@v0.2
