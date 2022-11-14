@@ -1,10 +1,10 @@
 name: oci_creation
 
 on:
-  push:
+#  push:
     branches: [ master, main, 'sprint/**', 'release/**' ]
 
-  pull_request:
+ # pull_request:
     # By default: opened, synchronize, or reopened.
     branches: [ master, main, 'sprint/**', 'release/**' ]
     
