@@ -24,10 +24,11 @@ jobs:
             # Make sure the @v0.6.0 matches the current version of the
             # action 
       uses: webfactory/ssh-agent@v0.6.0
-      with: ssh-private-key: ${{ secrets.COMCAST_SSH_KEY }}
+      with: 
+          ssh-private-key: ${{ secrets.COMCAST_SSH_KEY }}
       
-      - name: Test ssh
-        run: |
+    - name: Test ssh
+      run: |
             ls -ll
             echo "Running ssh command"
             eval `ssh-agent`
@@ -37,9 +38,9 @@ jobs:
             ssh-add -l -E sha256
            
       
-      - name: Checkout dwrobel
+    - name: Checkout dwrobel
           echo "Checkout dwrobel repo"
-        uses: actions/checkout@v3
-        with:
+      uses: actions/checkout@v3
+      with:
           repository: dwrobel/poky
           path: dwrobel
