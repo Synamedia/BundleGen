@@ -19,7 +19,7 @@ jobs:
         shell: bash
 
     steps:
-    - name: Add SSH key
+    - name: Configure SSH key
       uses: webfactory/ssh-agent@v0.6.0
       with: 
           ssh-private-key: ${{ secrets.COMCAST_SSH_KEY }}
