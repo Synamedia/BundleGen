@@ -29,7 +29,7 @@ jobs:
             # Replace example.com with the hostname of the machine
             # you're SSH-ing into
             ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
-            # DOKKU_SSH_KEY is the name of the repository secret
+            # COMCAST_SSH_KEY  is the name of the repository secret
             echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
             chmod 600 /home/runner/.ssh/github_actions
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
