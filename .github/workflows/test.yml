@@ -42,6 +42,8 @@ jobs:
             eval `ssh-agent`
             echo "Running ssh -vT command"
             ssh -vT git@github.com
+            echo "Running ssh-add"
+            ssh-add -l -E sha256
            
       
       - name: Checkout dwrobel
