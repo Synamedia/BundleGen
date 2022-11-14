@@ -28,9 +28,20 @@ jobs:
         with:
           path: Bundlegen
           
-      - name: Add key
+    
+      - name: Add SSH key
+        env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          ssh -o "StrictHostKeyChecking no" -o PasswordAuthentication=no github.com 
+            mkdir -p /home/runner/.ssh
+            # Replace example.com with the hostname of the machine
+            # you're SSH-ing into
+            ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
+            # DOKKU_SSH_KEY is the name of the repository secret
+            echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
+            chmod 600 /home/runner/.ssh/github_actions
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
+            ssh-add /home/runner/.ssh/github_actions 
 
       - name: checkout repo
         uses: Javier-varez/google-repo-action@v0.2
