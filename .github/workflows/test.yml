@@ -1,7 +1,7 @@
 name: Example Workflow - Testing
 on:
- # push:
- #   branches: [ master, main, 'sprint/**', 'release/**' ]
+  push:
+   branches: [ master, main, 'sprint/**', 'release/**' ]
 
   pull_request:
     # By default: opened, synchronize, or reopened
