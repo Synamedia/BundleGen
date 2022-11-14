@@ -24,9 +24,15 @@ jobs:
       
       - name: Checkout this repository
           echo "Checkout this repo"
-        uses: actions/checkout@v3
+        uses: |
+            actions/checkout@v3
+            webfactory/ssh-agent@v0.6.0    
         with:
           path: Bundlegen
+          ssh-private-key: ${{ secrets.COMCAST_SSH_KEY }}
+          
+          
+          
           
     
       - name: Add SSH key
