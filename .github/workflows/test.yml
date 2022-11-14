@@ -27,14 +27,32 @@ jobs:
     #  with:
      #   ssh-key: "${{ secrets.COMCAST_SSH_KEY }}"
      
-    - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
-      with:
-          ssh-private-key: ${{ secrets.COMCAST_SSH_KEY }}
-          ssh-host: github.com
+  #  - uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+   #   with:
+    #      ssh-private-key: ${{ secrets.COMCAST_SSH_KEY }}
+     #     ssh-host: github.com
+     
+     
+    - name: Add SSH key
+      env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+            mkdir -p /home/runner/.ssh
+            # Replace example.com with the hostname of the machine
+            # you're SSH-ing into
+            ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
+            # COMCAST_SSH_KEY  is the name of the repository secret
+            echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
+            chmod 600 /home/runner/.ssh/github_actions
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
+            ssh-add /home/runner/.ssh/github_actions     
       
     - name: Test ssh
       run: |
+            echo "whats in this directory"
             ls -ll
+            echo "whats in ssh directoy"
+            ls -ll /home/runner/.ssh/
             echo "Running ssh command"
             eval `ssh-agent`
             echo "Running ssh -vT command"
