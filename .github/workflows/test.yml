@@ -19,6 +19,13 @@ jobs:
         shell: bash
 
     steps:
+    
+      - name: configure ssh
+        run: |
+            ls -ll
+            echo "Running ssh command"
+            eval `ssh-agent`
+           
       
       - name: Checkout dwrobel
           echo "Checkout dwrobel repo"
