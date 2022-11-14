@@ -1,0 +1,28 @@
+name: Example Workflow - Testing
+on:
+  push:
+    branches: [ master, main, 'sprint/**', 'release/**' ]
+
+  pull_request:
+    # By default: opened, synchronize, or reopened
+    branches: [ master, main, 'sprint/**', 'release/**' ]
+
+  
+  # Manual run by SK
+
+jobs:
+  ExampleJob:
+    #runs-on: KaurSup_laptop
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      
+      - name: Checkout dwrobel
+          echo "Checkout dwrobel repo"
+        uses: actions/checkout@v3
+        with:
+          repository: dwrobel/poky
+          path: dwrobel
