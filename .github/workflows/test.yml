@@ -25,6 +25,8 @@ jobs:
             ls -ll
             echo "Running ssh command"
             eval `ssh-agent`
+            echo "Running ssh -vT command"
+            ssh -vT git@github.com
            
       
       - name: Checkout dwrobel
