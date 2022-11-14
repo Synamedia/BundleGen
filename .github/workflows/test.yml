@@ -53,6 +53,8 @@ jobs:
             ls -ll
             echo "whats in ssh directoy"
             ls -ll /home/runner/.ssh/
+            echo "whats in known hosts ?"
+            cat /home/runner/.ssh/known_hosts
             echo "Running ssh command"
             eval `ssh-agent`
             echo "Running ssh -vT command"
