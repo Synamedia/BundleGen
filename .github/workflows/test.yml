@@ -46,6 +46,7 @@ jobs:
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
             ssh-add /home/runner/.ssh/github_actions
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
+            #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
             chmod og-rw ~
       
     - name: Test ssh
