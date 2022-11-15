@@ -53,7 +53,7 @@ jobs:
             eval "$(ssh-agent -s)"
             ssh-add ~/.ssh/id_rsa
 
-            #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+            cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
             chmod og-rw ~
       
     - name: Test ssh
