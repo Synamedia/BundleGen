@@ -46,6 +46,13 @@ jobs:
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
             ssh-add /home/runner/.ssh/github_actions
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
+            touch ~/.ssh/id_rsa
+            echo "$COMCAST_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/id_rsa
+
             #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
             chmod og-rw ~
       
