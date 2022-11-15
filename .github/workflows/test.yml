@@ -44,7 +44,8 @@ jobs:
             echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
             chmod 600 /home/runner/.ssh/github_actions
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
-            ssh-add /home/runner/.ssh/github_actions     
+            ssh-add /home/runner/.ssh/github_actions
+            ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
       
     - name: Test ssh
       run: |
