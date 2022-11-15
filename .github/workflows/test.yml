@@ -48,20 +48,20 @@ jobs:
       
     - name: Test ssh
       run: |
-            echo "whats in this directory"
-            ls -ll
-            echo "whats in ssh directoy"
-            ls -ll /home/runner/.ssh/
-            echo " "
-            echo " "
-            echo "whats in known hosts ?"
-            cat /home/runner/.ssh/known_hosts
-            echo "Running ssh command"
-            eval `ssh-agent`
+          #  echo "whats in this directory"
+           # ls -ll
+            #echo "whats in ssh directoy"
+           # ls -ll /home/runner/.ssh/
+           # echo " "
+           # echo " "
+           # echo "whats in known hosts ?"
+           # cat /home/runner/.ssh/known_hosts
+           # echo "Running ssh command"
+           # eval `ssh-agent`
             echo "Running ssh -vT command"
-            ssh -vT git@github.com
-            echo "Running ssh-add"
-            ssh-add -l -E sha256
+            ssh -T git@github.com
+            #echo "Running ssh-add"
+            #ssh-add -l -E sha256
            
       
     - name: Checkout dwrobel
