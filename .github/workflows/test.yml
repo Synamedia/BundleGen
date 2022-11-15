@@ -60,7 +60,7 @@ jobs:
            # echo "Running ssh command"
            # eval `ssh-agent`
             echo "Running ssh -vT command"
-            ssh -T git@github.com
+            ssh -vT git@github.com
             #echo "Running ssh-add"
             #ssh-add -l -E sha256
            
