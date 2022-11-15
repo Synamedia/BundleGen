@@ -1,4 +1,4 @@
-name: Example Workflow - Testing
+name: test.yml
 on:
  # push:
   # branches: [ master, main, 'sprint/**', 'release/**' ]
