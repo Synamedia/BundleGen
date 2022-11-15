@@ -59,7 +59,11 @@ jobs:
            echo "whats in ssh directoy"
            ls -al ~/.ssh
            echo " "
-           echo " "           
+           echo " "   
+           echo "what are contents of rsa.pub"
+           cat ~/.ssh/id_rsa.pub
+           echo " "
+           echo " "            
            # echo "whats in known hosts ?"
            # cat /home/runner/.ssh/known_hosts
            echo " "
