@@ -12,7 +12,6 @@ on:
 
 jobs:
   ExampleJob:
-    #runs-on: KaurSup_laptop
     runs-on: ubuntu-latest
     defaults:
       run:
