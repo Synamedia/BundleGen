@@ -51,8 +51,8 @@ jobs:
       run: |
           #  echo "whats in this directory"
            # ls -ll
-            #echo "whats in ssh directoy"
-           # ls -ll /home/runner/.ssh/
+           echo "whats in ssh directoy"
+           ls -ll /home/runner/.ssh/
            # echo " "
            # echo " "
            # echo "whats in known hosts ?"
