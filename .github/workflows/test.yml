@@ -53,11 +53,11 @@ jobs:
           #  echo "whats in this directory"
            # ls -ll
            echo "whats in runner/.ssh directoy"
-           ls -ll /home/runner/.ssh/
+           ls -al /home/runner/.ssh/
            echo " "
            echo " "
            echo "whats in ssh directoy"
-           ls -ll ~/.ssh
+           ls -al ~/.ssh
            echo " "
            echo " "           
            # echo "whats in known hosts ?"
