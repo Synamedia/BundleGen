@@ -1,4 +1,4 @@
-name: Example Workflow - Testing
+name: BundlegenL1 unit test
 on:
   #push:
    # branches: [ master, main, 'sprint/**', 'release/**' ]
