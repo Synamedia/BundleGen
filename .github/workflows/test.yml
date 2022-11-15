@@ -62,6 +62,8 @@ jobs:
            echo " "           
            # echo "whats in known hosts ?"
            # cat /home/runner/.ssh/known_hosts
+           echo " "
+           echo " " 
            # echo "Running ssh command"
            # eval `ssh-agent`
             echo "Running ssh -vT command"
