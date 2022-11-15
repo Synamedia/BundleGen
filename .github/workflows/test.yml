@@ -52,10 +52,14 @@ jobs:
       run: |
           #  echo "whats in this directory"
            # ls -ll
-           echo "whats in ssh directoy"
+           echo "whats in runner/.ssh directoy"
            ls -ll /home/runner/.ssh/
-           # echo " "
-           # echo " "
+           echo " "
+           echo " "
+           echo "whats in ssh directoy"
+           ls -ll ~/.ssh
+           echo " "
+           echo " "           
            # echo "whats in known hosts ?"
            # cat /home/runner/.ssh/known_hosts
            # echo "Running ssh command"
