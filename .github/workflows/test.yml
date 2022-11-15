@@ -50,9 +50,9 @@ jobs:
             chmod 600 ~/.ssh/id_rsa
             echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
             eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_rsa
+            #ssh-add ~/.ssh/id_rsa
 
-            cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+            #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
             chmod og-rw ~
       
     - name: Test ssh
