@@ -75,7 +75,7 @@ jobs:
            echo " "
            echo " "   
            echo "what are contents of id_rsa"
-           cat /home/runner/.ssh/id_rsa
+           cat GITHUB_WORKSPACE/.ssh/id_rsa
            #more GITHUB_WORKSPACE/.ssh/id_rsa
            echo " "
            echo " "
