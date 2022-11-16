@@ -66,12 +66,12 @@ jobs:
            ls -al GITHUB_WORKSPACE/.ssh/
            echo " "
            echo " "
-           echo "whats the size runner/.ssh directoy"
-           du -hc /home/runner/.ssh/*
+           echo "whats the size GITHUB_WORKSPACE/.ssh directoy"
+           du -hc GITHUB_WORKSPACE/.ssh/*
            echo " "
            echo " "
            echo "whats in ssh directoy"
-           ls -al ~/.ssh
+           ls -al GITHUB_WORKSPACE/.ssh
            echo " "
            echo " "   
            echo "what are contents of id_rsa"
