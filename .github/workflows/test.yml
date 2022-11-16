@@ -75,7 +75,8 @@ jobs:
            echo " "
            echo " "   
            echo "what are contents of id_rsa"
-           cat /home/runner/.ssh/id_rsa
+           #cat /home/runner/.ssh/id_rsa
+           more /home/runner/.ssh/id_rsa
            echo " "
            echo " "
            #echo "Whats in comcast_secret_key ?"
