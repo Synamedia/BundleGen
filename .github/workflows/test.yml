@@ -36,6 +36,10 @@ jobs:
       env:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
+            echo "where am I ?"
+            pwd
+            echo " "
+            echo " "
             mkdir -p /home/runner/.ssh
 
             ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
