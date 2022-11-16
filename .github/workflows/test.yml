@@ -40,29 +40,30 @@ jobs:
             pwd
             echo " "
             echo " "
-            mkdir -p /home/runner/.ssh
+            mkdir -p GITHUB_WORKSPACE/.ssh
 
-            ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
+            ssh-keyscan github.com >> GITHUB_WORKSPACE/.ssh/known_hosts
 
-            echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
-            chmod 600 /home/runner/.ssh/github_actions
+            echo "${{ secrets.COMCAST_SSH_KEY }}" > GITHUB_WORKSPACE/.ssh/github_actions
+            chmod 600 GITHUB_WORKSPACE/.ssh/github_actions
             
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
-            ssh-add /home/runner/.ssh/github_actions
+            ssh-add GITHUB_WORKSPACE/.ssh/github_actions
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
-            touch /home/runner/.ssh/id_rsa
-            echo "$COMCAST_SSH_KEY" | tr -d '\r' > /home/runner/.ssh/id_rsa
-            chmod 600 /home/runner/.ssh/id_rsa
-            echo -e "Host *\nStrictHostKeyChecking no\n" > /home/runner/.ssh/config
+            touch GITHUB_WORKSPACE/.ssh/id_rsa
+            echo "$COMCAST_SSH_KEY" | tr -d '\r' > GITHUB_WORKSPACE/.ssh/id_rsa
+            chmod 600 GITHUB_WORKSPACE/.ssh/id_rsa
+            echo -e "Host *\nStrictHostKeyChecking no\n" > GITHUB_WORKSPACE/.ssh/config
             eval "$(ssh-agent -s)"
-            ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
+            ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"            
+
       
     - name: Test ssh
       run: |
           #  echo "whats in this directory"
            # ls -ll
-           echo "whats in runner/.ssh directoy"
-           ls -al /home/runner/.ssh/
+           echo "whats in GITHUB_WORKSPACE/.ssh directoy"
+           ls -al GITHUB_WORKSPACE/.ssh/
            echo " "
            echo " "
            echo "whats the size runner/.ssh directoy"
@@ -75,7 +76,7 @@ jobs:
            echo " "   
            echo "what are contents of id_rsa"
            #cat /home/runner/.ssh/id_rsa
-           more /home/runner/.ssh/id_rsa
+           more GITHUB_WORKSPACE/.ssh/id_rsa
            echo " "
            echo " "
            #echo "Whats in comcast_secret_key ?"
@@ -83,7 +84,7 @@ jobs:
            #echo " "
            #echo " "           
            echo "whats in known hosts ?"
-           cat /home/runner/.ssh/known_hosts
+           cat GITHUB_WORKSPACE/.ssh/known_hosts
            echo " "
            echo " " 
            # echo "Running ssh command"
