@@ -73,7 +73,7 @@ jobs:
            echo "whats in ssh directoy"
            ls -al GITHUB_WORKSPACE/.ssh
            echo " "
-           echo " "   
+           echo "end "   
            #echo "what are contents of id_rsa"
            #cat GITHUB_WORKSPACE/.ssh/id_rsa
            #more GITHUB_WORKSPACE/.ssh/id_rsa
