@@ -43,7 +43,7 @@ jobs:
             install -m 600 -D /dev/null ~/.ssh/id_rsa
             echo "${{ secrets.COMCAST_SSH_KEY }}" > ~/.ssh/id_rsa
             ssh-keyscan -H github.com > ~/.ssh/known_hosts
-            ssh-add /home/runner/.ssh/github_actions
+            #ssh-add /home/runner/.ssh/github_actions
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
       
     - name: Test ssh
