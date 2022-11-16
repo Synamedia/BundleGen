@@ -43,6 +43,8 @@ jobs:
             install -m 600 -D /dev/null ~/.ssh/id_rsa
             echo "${{ secrets.COMCAST_SSH_KEY }}" > ~/.ssh/id_rsa
             ssh-keyscan -H github.com > ~/.ssh/known_hosts
+            ssh-add /home/runner/.ssh/github_actions
+            ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
       
     - name: Test ssh
       run: |
@@ -56,12 +58,12 @@ jobs:
            ls -al ~/.ssh
            echo " "
            echo " "   
-           #echo "what are contents of rsa.pub"
-           #cat ~/.ssh/id_rsa.pub
+           echo "what are contents of id_rsa"
+           cat ~/.ssh/id_rsa
            echo " "
            echo " "            
-           # echo "whats in known hosts ?"
-           # cat /home/runner/.ssh/known_hosts
+           echo "whats in known hosts ?"
+           cat /home/runner/.ssh/known_hosts
            echo " "
            echo " " 
            # echo "Running ssh command"
