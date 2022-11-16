@@ -83,10 +83,10 @@ jobs:
            #cat ${{secrets.COMCAST_SSH_KEY}}
            #echo " "
            #echo " "           
-           echo "whats in known hosts ?"
-           cat GITHUB_WORKSPACE/.ssh/known_hosts
-           echo " "
-           echo " " 
+          # echo "whats in known hosts ?"
+          # cat GITHUB_WORKSPACE/.ssh/known_hosts
+          # echo " "
+          # echo " " 
            # echo "Running ssh command"
            # eval `ssh-agent`
             echo "Running ssh -vT command"
