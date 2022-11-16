@@ -50,11 +50,12 @@ jobs:
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
             ssh-add /home/runner/.ssh/github_actions
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
-            touch ~/.ssh/id_rsa
-            echo "$COMCAST_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
+            touch /home/runner/.ssh/id_rsa
+            echo "$COMCAST_SSH_KEY" | tr -d '\r' > /home/runner/.ssh/id_rsa
+            chmod 600 /home/runner/.ssh/id_rsa
+            echo -e "Host *\nStrictHostKeyChecking no\n" > /home/runner/.ssh/config
             eval "$(ssh-agent -s)"
+            ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
       
     - name: Test ssh
       run: |
