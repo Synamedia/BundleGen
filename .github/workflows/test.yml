@@ -40,24 +40,9 @@ jobs:
             pwd
             echo " "
             echo " "
-            mkdir -p /home/runner/.ssh
-
-            ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
-
-            echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
-            chmod 600 /home/runner/.ssh/github_actions
-            ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
-            ssh-add /home/runner/.ssh/github_actions
-            ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
-            touch ~/.ssh/id_rsa
-            echo "$COMCAST_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
-            eval "$(ssh-agent -s)"
-            #ssh-add ~/.ssh/id_rsa
-
-            #cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-            chmod og-rw ~
+            install -m 600 -D /dev/null ~/.ssh/id_rsa
+            echo "${{ secrets.COMCAST_SSH_KEY }}" > ~/.ssh/id_rsa
+            ssh-keyscan -H github.com > ~/.ssh/known_hosts
       
     - name: Test ssh
       run: |
