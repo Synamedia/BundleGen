@@ -40,13 +40,20 @@ jobs:
             pwd
             echo " "
             echo " "
-            install -m 600 -D /dev/null ~/.ssh/id_rsa
-            echo "${{ secrets.COMCAST_SSH_KEY }}" > ~/.ssh/id_rsa
-            ssh-keyscan -H github.com > ~/.ssh/known_hosts
-            #Start the ssh agent manually
+            mkdir -p /home/runner/.ssh
+
+            ssh-keyscan github.com >> /home/runner/.ssh/known_hosts
+
+            echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
+            chmod 600 /home/runner/.ssh/github_actions
             eval "$(ssh-agent -s)"
-            #ssh-add /home/runner/.ssh/github_actions
-            ssh-add ~/.ssh/id_rsa
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
+            ssh-add /home/runner/.ssh/github_actions
+            ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
+            touch ~/.ssh/id_rsa
+            echo "$COMCAST_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
       
     - name: Test ssh
       run: |
@@ -64,10 +71,10 @@ jobs:
            cat ~/.ssh/id_rsa
            echo " "
            echo " "
-           echo "Whats in comcast_secret_key ?"
-           cat ${{secrets.COMCAST_SSH_KEY}}
-           echo " "
-           echo " "           
+           #echo "Whats in comcast_secret_key ?"
+           #cat ${{secrets.COMCAST_SSH_KEY}}
+           #echo " "
+           #echo " "           
            echo "whats in known hosts ?"
            cat /home/runner/.ssh/known_hosts
            echo " "
