@@ -46,7 +46,7 @@ jobs:
 
             echo "${{ secrets.COMCAST_SSH_KEY }}" > /home/runner/.ssh/github_actions
             chmod 600 /home/runner/.ssh/github_actions
-            eval "$(ssh-agent -s)"
+            
             ssh-agent -a $SSH_AUTH_SOCK > /dev/null   
             ssh-add /home/runner/.ssh/github_actions
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
@@ -54,6 +54,7 @@ jobs:
             echo "$COMCAST_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             echo -e "Host *\nStrictHostKeyChecking no\n" > ~/.ssh/config
+            eval "$(ssh-agent -s)"
       
     - name: Test ssh
       run: |
