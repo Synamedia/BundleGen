@@ -74,11 +74,11 @@ jobs:
            ls -al GITHUB_WORKSPACE/.ssh
            echo " "
            echo " "   
-           echo "what are contents of id_rsa"
-           cat GITHUB_WORKSPACE/.ssh/id_rsa
+           #echo "what are contents of id_rsa"
+           #cat GITHUB_WORKSPACE/.ssh/id_rsa
            #more GITHUB_WORKSPACE/.ssh/id_rsa
-           echo " "
-           echo " "
+           #echo " "
+           #echo " "
            #echo "Whats in comcast_secret_key ?"
            #cat ${{secrets.COMCAST_SSH_KEY}}
            #echo " "
