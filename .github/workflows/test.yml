@@ -66,7 +66,7 @@ jobs:
            echo " "
            echo " "
            echo "whats the size runner/.ssh directoy"
-           du -hc /home/runner/.ssh/
+           du -hc /home/runner/.ssh/*
            echo " "
            echo " "
            echo "whats in ssh directoy"
