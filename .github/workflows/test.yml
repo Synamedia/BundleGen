@@ -56,7 +56,6 @@ jobs:
             echo -e "Host *\nStrictHostKeyChecking no\n" > /home/runner/.ssh/config
             eval "$(ssh-agent -s)"
             ssh-add - <<< "${{ secrets.COMCAST_SSH_KEY }}"
-            ssh -i /home/runner/.ssh/id_rsa
       
     - name: Test ssh
       run: |
