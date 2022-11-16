@@ -1,6 +1,6 @@
 name: SSH setup
 on:
-  push:
+  pull:
    branches: [ master, main, 'sprint/**', 'release/**' ]
 
 jobs:
