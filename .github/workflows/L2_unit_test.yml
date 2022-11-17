@@ -35,5 +35,5 @@ jobs:
             
             echo "path"
             pwd
-            
-            python Bundlegen/unit_tests/L2_testing/run_L2_test.py -a wayland-egl-test -p rpi3_reference
+            cd Bundlegen/unit_tests/L2_testing
+            python run_L2_test.py -a wayland-egl-test -p rpi3_reference
