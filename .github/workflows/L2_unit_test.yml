@@ -1,0 +1,39 @@
+name: L2 Unit testing
+on:
+  push:
+   branches: [ master, main, 'sprint/**', 'release/**' ]
+
+  pull_request:
+    # By default: opened, synchronize, or reopened
+    branches: [ master, main, 'sprint/**', 'release/**' ]
+
+jobs:
+  ExampleJob:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout this repository
+          echo "Checkout this repo"
+        uses: actions/checkout@v3
+        with:
+          path: Bundlegen
+ 
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+      - run: pip install -r Bundlegen/requirements.txt
+      - run: pip install --editable Bundlegen/
+      
+ 
+      - name: Run the unit test
+        run: |
+            #cd unit_tests
+            #bash ./Bundlegen/sample-bash.sh
+            #bash ./unit_tests/run_L1_full_test.sh
+            python Bundlegen/unit_tests/L2_testing/run_L2_test.py
+            python run_L2_test.py -a wayland-egl-test -p rpi3_reference
