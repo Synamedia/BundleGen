@@ -39,4 +39,6 @@ jobs:
             ls -ll
             echo "path"
             pwd
+            echo " echo "ls -ll Bundlegen""
+            ls -ll Bundlegen/
             python bundlegen/unit_tests/L2_testing/run_L2_test.py -a wayland-egl-test -p rpi3_reference
