@@ -35,5 +35,4 @@ jobs:
             #cd unit_tests
             #bash ./Bundlegen/sample-bash.sh
             #bash ./unit_tests/run_L1_full_test.sh
-            python Bundlegen/unit_tests/L2_testing/run_L2_test.py
-            python run_L2_test.py -a wayland-egl-test -p rpi3_reference
+            python Bundlegen/unit_tests/L2_testing/run_L2_test.py -a wayland-egl-test -p rpi3_reference
