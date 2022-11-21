@@ -58,59 +58,71 @@ def load_json(file_path):
     return data
 
 class TestBundleData(TestBase):
-    failure = unittest.TestCase.failureException
-
-    @property
-    def failureException(self):
-         has_failures.append('fail')
-         return self.failure
-
     def setUp(self):
          logger.debug("Setup")
-         global has_failures
-         has_failures = []
          get_L2_test_results.add_test_results.add_tests(self)
 
     def tearDown(self):
-         logger.debug("Tear down")
-         global has_failures
-         if has_failures:
-             get_L2_test_results.add_test_results.test_failed(self)
-         else:
-             get_L2_test_results.add_test_results.test_passed(self)
+        logger.debug("tearDown")
+        if hasattr(self._outcome, 'errors'):
+            # Python 3.4 - 3.10  (These two methods have no side effects)
+            result = self.defaultTestResult()
+            self._feedErrorsToResult(result, self._outcome.errors)
+        else:
+            # Python 3.11+
+            result = self._outcome.result
+        ok = all(test != self for test, text in result.errors + result.failures)
+
+        # Demo output:  (print short info immediately - not important)
+        if ok:
+            logger.debug('\nOK: %s' % (self.id(),))
+            get_L2_test_results.add_test_results.test_passed(self)
+
+        for typ, errors in (('ERROR', result.errors), ('FAIL', result.failures)):
+            for test, text in errors:
+                if test is self:
+                    #  the full traceback is in the variable `text`
+                    msg = [x for x in text.split('\n')[1:]
+                           if not x.startswith(' ')][0]
+                    logger.debug("\n\n%s: %s\n     %s" % (typ, self.id(), msg))
+                    get_L2_test_results.add_test_results.test_failed(self, msg)
 
     @classmethod
     def tearDownClass(self):
         get_L2_test_results.add_test_results.end_results(self)
 
     def test_bundle(self):
-        path = "../../dac-image-"+sys.argv[1]+"-bundle/rootfs/usr/bin/"+sys.argv[1]
+        logger.debug("-->Verifying appmetadata path")
+        path = "./bundlegen_images/"+sys.argv[1]+"-bundle/rootfs/usr/bin/"+sys.argv[1].replace("dac-image-","")
         status = os.stat(path)
         self.assertNotEqual(status.st_size,0)
-        logger.debug("-->appmetadata path has created")
+        logger.debug("-->Successfully appmetadata path has verified")
 
     def test_config(self):
-        path = "../../dac-image-"+sys.argv[1]+"-bundle/config.json"
+        logger.debug("-->Verifying config.json path")
+        path = "bundlegen_images/"+sys.argv[1]+"-bundle/config.json"
         status = os.stat(path)
         self.assertNotEqual(status.st_size,0)
-        logger.debug("-->config.json file was present and verified")
+        logger.debug("-->Successfully config.json path was verified")
 
     def test_app_name(self):
-        config_json_path = "../../dac-image-"+sys.argv[1]+"-bundle/config.json"
+        logger.debug("-->Retrieving appname from config.json")
+        config_json_path = "bundlegen_images/"+sys.argv[1]+"-bundle/config.json"
         finalconfigdata = load_json(config_json_path)
         #iterating through all keys in finalconfigdata
         for k,v in finalconfigdata.items():
                 if k == "process":
                     app_path=v['args'][1]
         #self.assertEqual(app_path,("/usr/bin/"+sys.argv[1]+"-test"))
-        self.assertEqual(app_path,("/usr/bin/"+sys.argv[1]))
+        self.assertEqual(app_path,("/usr/bin/"+sys.argv[1].replace("dac-image-","")))
         logger.debug("-->Successfully App name was retrieved from config.json")
 
     def test_appmetadata(self):
+        logger.debug("-->Validating values in config.json")
         #Passing the appmetadata.json(argv[1]= "wayland-egl") and platform config(argv[2]= "rpi3_reference") as an argument to input script command
         #We shall copy the app metadata in the same folder where we have this script test_bundle.py
-        appmetadata_path = "./"+sys.argv[1]+"_appmetadata.json"
-        config_json_path = "../../dac-image-"+sys.argv[1]+"-bundle/config.json"
+        appmetadata_path = "metadatas/"+sys.argv[1]+"-appmetadata.json"
+        config_json_path = "bundlegen_images/"+sys.argv[1]+"-bundle/config.json"
         platform_path = "../../templates/generic/"+sys.argv[2]+".json"
 
         appmetadata = load_json(appmetadata_path)
@@ -150,7 +162,6 @@ class TestBundleData(TestBase):
                  device_infor_1 = value['devs']
                  for k in device_infor_1:
                     dev_list_platform.append(k)
-
         #iterating through all keys in finalconfigdata i.e config.json
         for k,v in finalconfigdata.items():
             if k == "rdkPlugins":
@@ -168,7 +179,6 @@ class TestBundleData(TestBase):
 
                  for key in linux_resource_dev_info:
                     linux_resource_dev_information.append(key)
-
         #Validating the appmetadata,platform cfg in config.json
         #Check for the app metadata,.platform config fields in config.json
         self.assertEqual(netwrk_type_config,netwrk_type)
@@ -227,7 +237,7 @@ class TestBundleData(TestBase):
 
             self.assertEqual(f.get('minor'),b.get('minor'))
 
-        logger.debug("-->All values in config.json have been validated")
+        logger.debug("-->All values in config.json are validated")
 
 if __name__ == '__main__':
     unittest.main(argv=['first-arg-is-ignored'], exit=False)
