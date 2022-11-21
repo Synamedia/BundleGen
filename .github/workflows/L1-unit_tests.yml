@@ -2,7 +2,7 @@ name: L1 unit test
 
 on:
   push:
-    branches: [ main, 'sprint/**', 'release/**' ]
+    branches: [ master, main, 'sprint/**', 'release/**' ]
     
   pull_request:
     # By default: opened, synchronize, or reopened
