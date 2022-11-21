@@ -22,11 +22,10 @@ os.chdir('test_files')
 parse = argparse.ArgumentParser()
 parse.add_argument("-s")
 args = parse.parse_args()
-if args.s == "test_Bundleprocessor_ut":
-    os.system('python +test_'+args.s+'_ut.py')
+if args.s:
+    os.system('python test_'+args.s+'_ut.py')
 else:
     files = glob.glob('*.py')
     for i in files:
         os.system('python '+i)
-    
 

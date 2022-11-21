@@ -20,15 +20,46 @@
 import os
 import sys
 import unittest
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from unit_tests.L1_testing import get_L1_test_results
 from bundlegen.core.bundle_processor import BundleProcessor
 from loguru import logger
-
-
-
 #This class will test the functionality of API's in bundleprocessor.py file.
 class TestBundleProcessor(unittest.TestCase):
+    def setUp(self):
+         logger.debug("Setup")
+         get_L1_test_results.add_test_results.add_tests(self)
+
+    def tearDown(self):
+        logger.debug("tearDown")
+        if hasattr(self._outcome, 'errors'):
+            # Python 3.4 - 3.10  (These two methods have no side effects)
+            result = self.defaultTestResult()
+            self._feedErrorsToResult(result, self._outcome.errors)
+        else:
+            # Python 3.11+
+            result = self._outcome.result
+        ok = all(test != self for test, text in result.errors + result.failures)
+
+       # Demo output:  (print short info immediately - not important)
+        if ok:
+            logger.debug('\nOK: %s' % (self.id(),))
+            get_L1_test_results.add_test_results.test_passed(self)
+
+        for typ, errors in (('ERROR', result.errors), ('FAIL', result.failures)):
+            for test, text in errors:
+                if test is self:
+                    #  the full traceback is in the variable `text`
+                    msg = [x for x in text.split('\n')[1:]
+                           if not x.startswith(' ')][0]
+                    logger.debug("\n\n%s: %s\n     %s" % (typ, self.id(), msg))
+                    get_L1_test_results.add_test_results.test_failed(self, msg)
+
+    @classmethod
+    def tearDownClass(self):
+        get_L1_test_results.add_test_results.end_results(self)
+
     def test_process_oci_version(self):
     #When generate_compliant_config: True then it will parse the value of ociversion as 1.0.2
         logger.debug("-->It will parse oci_version as 1.0.2")
@@ -104,7 +135,6 @@ class TestBundleProcessor(unittest.TestCase):
         processor.platform_cfg = {
             "hardware": {
                 "graphics": True,
-                "maxRam_disabled": "610M"
             }
         }
         processor.oci_config = {
@@ -168,7 +198,7 @@ class TestBundleProcessor(unittest.TestCase):
         self.assertEqual(processor.oci_config, expected)
         logger.debug("-->Test was Successfully verified")
 
-    def test_process_logging_(self):
+    def test_process_logging1(self):
     #Assigning value "logging":{"mode": ""journald""}
         logger.debug("-->Parsing values inside logging plugin based on the value of mode:journald")
         processor = BundleProcessor()
@@ -314,7 +344,6 @@ class TestBundleProcessor(unittest.TestCase):
         processor.platform_cfg = {
             "hardware": {
             "graphics": True,
-            "maxRam_disabled": "610M"
             },
             "gpu":{
             "extraMounts":[ ],
@@ -384,11 +413,52 @@ class TestBundleProcessor(unittest.TestCase):
         self.assertEqual(processor.oci_config, expected)
         logger.debug("-->Test was Successfully verified")
 
+    def test_process_mounts1(self):
+        logger.debug("-->Parsing all values of mounts from app_metadata")
+        #print("Parsing the values to mounts")
+        processor = BundleProcessor()
+        processor.rootfs_path = None
+        processor.createmountpoints = None
+        processor.app_metadata={
+        }
+        processor.platform_cfg = {
+         "mounts": [
+            {
+            "destination": "/data",
+            "type": "none",
+            "source": "/volumes/testing",
+            "options": [
+                "rbind",
+                "rw"
+                    ]
+                }
+            ]
+        }
+        processor.oci_config = {
+            "mounts":[]
+        }
+        processor._process_mounts()
+        expected = {
+            "mounts": [
+            {
+            "destination": "/data",
+            "type": "none",
+            "source": "/volumes/testing",
+            "options": [
+                "rbind",
+                "rw"
+                    ]
+                }
+            ]
+        }
+        self.assertEqual(processor.oci_config, expected)
+        logger.debug("-->Test was Successfully verified")
+
     def test_process_network(self):
         #Parsing all values to rdk_plugins from app_metadata which values were defined in network
         logger.debug("-->Parsing all values of network to rdkPlugins")
         processor = BundleProcessor()
-        processor.rootfs_path = None
+        processor.rootfs_path = "/tmp/test"
         processor.createmountpoints = None
         processor.app_metadata = {
             "network": {
@@ -508,7 +578,7 @@ class TestBundleProcessor(unittest.TestCase):
         }
         self.assertEqual(processor.oci_config, expected)
         logger.debug("-->Test was Successfully verified")
- 
+
     def test_add_rdk_plugins(self):
     #If platform_cfg has plugindir inside the dobby then rdk_plugins dict was created inside oci_config
         logger.debug("-->Creates rdk_plugins inside oci_config")
@@ -556,6 +626,53 @@ class TestBundleProcessor(unittest.TestCase):
         }
         self.assertEqual(processor.oci_config, expected)
         logger.debug("-->Test was Successfully verified")
+
+    def test_should_generate_compliant_config(self):
+        logger.debug("-->Assigning generateCompliantConfig to true")
+        processor = BundleProcessor()
+        processor.rootfs_path = None
+        processor.createmountpoints = None
+        processor.platform_cfg = {
+            "dobby": {
+            "generateCompliantConfig": True
+            }
+        }
+        actual = processor._should_generate_compliant_config()
+        expected = True
+        self.assertEqual(actual, expected)
+        logger.debug("-->Test was Successfully verified")
+
+    def test_should_generate_compliant_config_false(self):
+        logger.debug("-->Assigning generateCompliantConfig to false")
+        processor = BundleProcessor()
+        processor.rootfs_path = None
+        processor.createmountpoints = None
+        processor.platform_cfg = {
+            "dobby": {
+                "generateCompliantConfig": False
+            }
+        }
+        actual = processor._should_generate_compliant_config()
+        expected = False
+        self.assertEqual(actual, expected)
+        logger.debug("-->Test was Successfully verified")
+
+    def test_is_mapped_1(self):
+        logger.debug("-->Assigning value of id to None")
+        processor = BundleProcessor()
+        actual = processor._is_mapped(None,0)
+        expected = True
+        self.assertEqual(actual, expected)
+        logger.debug("-->Test was Successfully verified")
+
+    def test_is_mapped_2(self):
+        logger.debug("-->Assigning value of mappings to None")
+        processor = BundleProcessor()
+        actual = processor._is_mapped(0,None)
+        expected = False
+        self.assertEqual(actual, expected)
+        logger.debug("-->Test was Successfully verified")
+
 
 if __name__ == "__main__":
     unittest.main()
