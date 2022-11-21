@@ -37,4 +37,5 @@ jobs:
  
       - name: Run the unit test
         run: |
-            python Bundlegen/unit_tests/L1_testing/test_files/test_Bundleprocessor_ut.py
+            #python Bundlegen/unit_tests/L1_testing/test_files/test_Bundleprocessor_ut.py
+            python Bundlegen/unit_tests/L1_testing/run_L1_test.py
