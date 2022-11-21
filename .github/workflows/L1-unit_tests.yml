@@ -33,8 +33,9 @@ jobs:
       
  
       - name: Run the unit test
+        working-directory: ./Bundlegen/unit_tests/L1_testing      
         run: |
             #python Bundlegen/unit_tests/L1_testing/test_files/test_Bundleprocessor_ut.py
-            bash cd Bundlegen/unit_tests/L1_testing
+            #bash cd Bundlegen/unit_tests/L1_testing
             python run_L1_test.py
             #python Bundlegen/unit_tests/L1_testing/run_L1_test.py
