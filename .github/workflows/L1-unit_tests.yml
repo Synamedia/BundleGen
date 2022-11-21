@@ -7,9 +7,6 @@ on:
   pull_request:
     # By default: opened, synchronize, or reopened
     branches: [ master, main, 'sprint/**', 'release/**' ]
-
-  schedule:
-      - cron: '35 7,19 * * *'
  
 jobs:
   L1-unit-test:
