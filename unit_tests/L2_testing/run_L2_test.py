@@ -41,7 +41,7 @@ if(os.path.isfile(oci_image)):
     logger.debug("Extracting App Metadata Json file... \n")
 else:
      logger.debug("Oci Image for [%s] App is not present inside [%s] folder" %(appname, oci_images_dir_path))
-     logger.error("Exiting...")
+     logger.error("Exiting now...")
      exit()
 
 src="oci_image_untar"
