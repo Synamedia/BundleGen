@@ -15,13 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#Description : To retrieve the name of the directory and adding "cases" to the directory.
+
 import sys
 import unittest
 import os
 
 def setup_sys_path():
     directory = os.path.dirname(os.path.abspath(__file__))
-
 class TestBase(unittest.TestCase):
     def setUp(self):
         directory = os.path.dirname(os.path.abspath(__file__))

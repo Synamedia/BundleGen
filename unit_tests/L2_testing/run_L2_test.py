@@ -24,11 +24,42 @@ import shutil
 from bundlegen.core.utils import Utils
 
 from loguru import logger
-
 parse = argparse.ArgumentParser()
 parse.add_argument("-a")
 parse.add_argument("-p")
+parse.add_argument("-b")
 args = parse.parse_args()
+os.chdir("oci_images")
+if os.path.isfile(''+args.a+'-oci.tar'):
+    file = tarfile.open(''+args.a+'-oci.tar')
+    os.chdir("../../..")
+    if os.path.isdir(''+args.a+'-oci'):
+        shutil.rmtree(''+args.a+'-oci')
+    file.extractall(''+args.a+'-oci')
+    file.close()
+else:
+    logger.error("oci_image is not present")
+    sys.exit(1)
+
+if args.b == "yes":
+    if os.path.isdir(''+args.a+'-bundle'):
+        shutil.rmtree(''+args.a+'-bundle')
+    if os.path.isfile(''+args.a+'-bundle.tar.gz'):
+        os.remove(''+args.a+'-bundle.tar.gz')
+    os.mkdir(''+args.a+'-bundle',0o777)
+    os.system('bundlegen generate --platform rpi3_reference oci:./'+args.a+'-oci:latest ./'+args.a+'-bundle')
+    file = tarfile.open(''+args.a+'-bundle.tar.gz')
+    os.chdir("unit_tests/L2_testing/bundlegen_images")
+    file.extractall(''+args.a+'-bundle')
+    file.close()
+    os.chdir("..")
+else:
+    os.chdir("unit_tests/L2_testing/bundlegen_images")
+    file = tarfile.open(''+args.a+'-bundle.tar.gz')
+    file.extractall(''+args.a+'-bundle')
+    file.close()
+    os.chdir("..")
+os.mkdir('metadatas',0o777)
 oci_images_dir_path = os.chdir("oci_images")
 oci_images_path = os.getcwd()
 appname=str(args.a)
@@ -40,9 +71,9 @@ if(os.path.isfile(oci_image)):
     logger.debug("Oci Image for [%s] App is available" %(appname))
     logger.debug("Extracting App Metadata Json file... \n")
 else:
-     logger.debug("Oci Image for [%s] App is not present inside [%s] folder" %(appname, oci_images_dir_path))
-     logger.error("Exiting now...")
-     sys.exit(1)
+    logger.debug("Oci Image for [%s] App is not present inside [%s] folder" %(appname, oci_images_dir_path))
+    logger.debug("Exiting...")
+    sys.exit(1)
 
 src="oci_image_untar"
 #untaring OCI image and pasting in ./dac-image-wayland-egl-test directory
@@ -53,53 +84,34 @@ dst="../metadatas"+"/"+appname+"-bundle"
 umoci_command = f'umoci unpack --rootless --image {src} {dst}'
 logger.debug(umoci_command)
 success = Utils().run_process(umoci_command)
-
 if(os.path.isdir(src)):
     shutil.rmtree(src)
 os.chdir("../metadatas")
 app_metadata_file_path=appname+"-bundle"+"/"+"rootfs"+"/"+"appmetadata.json"
 app_metadata_file= appname+"-appmetadata.json"
-
 if(os.path.isfile(app_metadata_file)):
     os.remove(app_metadata_file)
     logger.debug("Old [%s] file deleted successfully" %app_metadata_file)
 shutil.copy(app_metadata_file_path, ".")
-
 if(os.path.isdir(appname+"-bundle")):
     shutil.rmtree(appname+"-bundle")
 os.rename('appmetadata.json', app_metadata_file)
-
 if(os.path.isfile(app_metadata_file)):
     logger.debug("App Metadata extracted from Oci Image successfully...")
-os.chdir("../oci_images")
-file = tarfile.open(''+args.a+'-oci.tar')
-file.extractall(''+args.a+'-oci')
-file.close()
-os.chdir("..")
-os.chdir("bundlegen_images")
-file = tarfile.open(''+args.a+'-bundle.tar.gz')
-file.extractall(''+args.a+'-bundle')
-file.close()
-os.chdir("..")
+os.chdir("..")   
+
 
 if args.a and args.p:
     os.system('python test_bundle.py '+args.a +" "+args.p)
-    os.chdir("oci_images")
-    shutil.rmtree(''+args.a+'-oci')
-    os.chdir("..")
     os.chdir("bundlegen_images")
     shutil.rmtree(''+args.a+'-bundle')
     os.chdir("..")
-    os.chdir("metadatas")
-    os.remove(''+args.a+'-appmetadata.json')
+    shutil.rmtree('metadatas')
 else:
     print("\n usage: run_L2_test.py [-h] [-a App_Name] [-p Platform_Name] \n")
-    os.chdir("oci_images")
-    shutil.rmtree(''+args.a+'-oci')
-    os.chdir("..")
     os.chdir("bundlegen_images")
     shutil.rmtree(''+args.a+'-bundle')
     os.chdir("..")
-    os.chdir("metadatas")
-    shutil.rmtree(''+args.a+'-appmetadata.json')
+    shutil.rmtree('metadatas')
     sys.exit(1)
+
