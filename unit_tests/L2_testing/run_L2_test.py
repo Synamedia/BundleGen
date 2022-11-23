@@ -42,7 +42,7 @@ if(os.path.isfile(oci_image)):
 else:
      logger.debug("Oci Image for [%s] App is not present inside [%s] folder" %(appname, oci_images_dir_path))
      logger.error("Exiting now...")
-     exit()
+     sys.exit(1)
 
 src="oci_image_untar"
 #untaring OCI image and pasting in ./dac-image-wayland-egl-test directory
