@@ -42,24 +42,25 @@ class add_test_results:
         result.close()
 
     def end_results(self):
-       global passed
-       global total
-       logger.debug("Total Tests Ran= %s" %total)
-       logger.debug("Passed = %s" %passed)
-       logger.debug("Failed = %s" %(total-passed))
-       global result
-       result = open("L1_test_results.txt", "r")
-       content = result.read()
-       result.close()
-       result = open("L1_test_results.txt", "w")
-       result.write("TEST RESULTS\n")
-       result.write("============")
-       result.write("\nTOTAL TESTS: %d\n" %(total))
-       result.write("PASSED: %d\n" %(passed))
-       result.write("FAILED: %d\n" %(total-passed))
-       result.write("\nTEST DETAILS")
-       result.write("\n============\n")
-       result.write(content)
-       result.close()
-    if (total-passed)>0:
-        sys.exit(1)
+        global passed
+        global total
+        logger.debug("Total Tests Ran= %s" %total)
+        logger.debug("Passed = %s" %passed)
+        logger.debug("Failed = %s" %(total-passed))
+        global result
+        result = open("L1_test_results.txt", "r")
+        content = result.read()
+        result.close()
+        result = open("L1_test_results.txt", "w")
+        result.write("TEST RESULTS\n")
+        result.write("============")
+        result.write("\nTOTAL TESTS: %d\n" %(total))
+        result.write("PASSED: %d\n" %(passed))
+        result.write("FAILED: %d\n" %(total-passed))
+        result.write("\nTEST DETAILS")
+        result.write("\n============\n")
+        result.write(content)
+        result.close()
+        if (total-passed)>0:
+            logger.error("%d test cases are failed" %(total-passed))
+            sys.exit(1)
