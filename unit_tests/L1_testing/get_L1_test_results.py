@@ -64,3 +64,5 @@ class add_test_results:
         if (total-passed)>0:
             logger.error("%d test cases are failed" %(total-passed))
             sys.exit(1)
+            logger.error("%d test cases are failed" %(total-passed))
+   
