@@ -30,7 +30,7 @@ jobs:
           cache: 'pip'
       - run: pip install -r Bundlegen/requirements.txt
              pip install --editable Bundlegen/
-             sudo apt-get install -y python3-jsonschema
+             pip install jsonschema
 
       - name: Run the unit test
         working-directory: ./Bundlegen/unit_tests/L1_testing
