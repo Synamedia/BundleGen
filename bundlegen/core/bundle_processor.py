@@ -508,6 +508,7 @@ class BundleProcessor:
 
     # ==========================================================================
     def _add_mount(self, mount):
+        print(mount)
         if 'source' in mount:
             mount['source'] = mount['source'].format(id=self.app_metadata['id'])
         if self.createmountpoints:
