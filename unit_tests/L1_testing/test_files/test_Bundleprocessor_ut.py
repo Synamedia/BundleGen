@@ -451,6 +451,7 @@ class TestBundleProcessor(unittest.TestCase):
             ]
         }
         self.assertEqual(processor.oci_config, expected)
+        print(processor.oci_config)
         logger.debug("-->Test was Successfully verified")
 
     def test_process_network(self):
