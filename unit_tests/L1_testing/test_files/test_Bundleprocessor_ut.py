@@ -397,6 +397,7 @@ class TestBundleProcessor(unittest.TestCase):
             "mounts":[]
         }
         processor._process_mounts()
+        print(processor.oci_config)
         expected = {
             "mounts": [
             {
@@ -410,6 +411,7 @@ class TestBundleProcessor(unittest.TestCase):
                 }
             ]
         }
+        print(processor.oci_config)
         self.assertEqual(processor.oci_config, expected)
         logger.debug("-->Test was Successfully verified")
 
@@ -437,6 +439,7 @@ class TestBundleProcessor(unittest.TestCase):
             "mounts":[]
         }
         processor._process_mounts()
+        print(processor.oci_config)
         expected = {
             "mounts": [
             {
@@ -450,8 +453,8 @@ class TestBundleProcessor(unittest.TestCase):
                 }
             ]
         }
-        self.assertEqual(processor.oci_config, expected)
         print(processor.oci_config)
+        self.assertEqual(processor.oci_config, expected)
         logger.debug("-->Test was Successfully verified")
 
     def test_process_network(self):
@@ -2679,6 +2682,7 @@ class TestBundleProcessor(unittest.TestCase):
                 {'source': '/tmp/westeros-dac', 'destination': '/tmp/westeros', 'type': 'bind', 'options': ['rbind', 'nosuid', 'nodev']}],
             'process': {'env': ['LD_PRELOAD=/usr/lib/libwayland-client.so.0:/usr/lib/libwayland-egl.so.0', 'WAYLAND_DISPLAY=westeros']}
         }
+        print(processor.oci_config)
         self.assertEqual(processor.oci_config, expected)
 
     def test_checking_dobby_plugindependies01(self):
